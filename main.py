@@ -8,12 +8,52 @@ import altair as alt
 from PIL import Image
 
 #Import csv
-coverage_by_country = pd.read_csv('art_coverage_by_country_clean.csv').dropna()
-children_coverage_by_country = pd.read_csv('art_pediatric_coverage_by_country_clean.csv').dropna()
-nbr_adults_cases_15_to_49 = pd.read_csv('no_of_cases_adults_15_to_49_by_country_clean.csv').dropna()
-nbr_of_death_by_country = pd.read_csv('no_of_deaths_by_country_clean.csv').dropna()
-nbr_of_people_living_with_hiv = pd.read_csv('no_of_people_living_with_hiv_by_country_clean.csv').dropna()
-prevention_mother_chil_by_country = pd.read_csv('prevention_of_mother_to_child_transmission_by_country_clean.csv').dropna()
+
+@st.cache
+def load_art():
+    data = pd.read_csv('art_coverage_by_country_clean.csv', )
+    return data
+
+@st.cache
+def load_art_ped():
+    data = pd.read_csv('art_pediatric_coverage_by_country_clean.csv')
+    return data
+
+@st.cache
+def load_cases():
+    data = pd.read_csv('no_of_cases_adults_15_to_49_by_country_clean.csv')
+    return data
+
+@st.cache
+def load_deaths():
+    data = pd.read_csv('no_of_deaths_by_country_clean.csv')
+    return data
+
+@st.cache
+def load_living():
+    data = pd.read_csv('no_of_people_living_with_hiv_by_country_clean.csv')
+    return data
+
+@st.cache
+def load_prevention():
+    data = pd.read_csv('prevention_of_mother_to_child_transmission_by_country_clean.csv')
+    return data
+
+
+
+coverage_by_country = load_art()
+children_coverage_by_country = load_art_ped()
+nbr_adults_cases_15_to_49 = load_cases()
+nbr_of_death_by_country = load_deaths()
+nbr_of_people_living_with_hiv = load_living()
+prevention_mother_chil_by_country = load_prevention()
+
+coverage_by_country = coverage_by_country.dropna()
+children_coverage_by_country = load_art_ped().dropna()
+nbr_adults_cases_15_to_49 = load_cases().dropna()
+nbr_of_death_by_country = load_deaths().dropna()
+nbr_of_people_living_with_hiv = load_living().dropna()
+prevention_mother_chil_by_country = load_prevention().dropna()
 
 
 #Title
